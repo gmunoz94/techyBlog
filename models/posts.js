@@ -34,7 +34,7 @@ posts.init(
         timestamps: true,
         freezeTableName: true,
         underscored: true,
-        modelName: 'comments',
+        modelName: 'posts',
     }
 );
 

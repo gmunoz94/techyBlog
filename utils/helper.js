@@ -1,11 +1,13 @@
-module.exports = {
-    format_time: (date) => {
-      return date.toLocaleTimeString();
-    },
-    format_date: (date) => {
-      return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${
-        new Date(date).getFullYear() + 5
-      }`;
-    },
-  };
-  
+const withAuth = (req, res, next) => {
+
+  // If the user is not logged in, redirect the user to the login page
+  if (!req.session.loggedIn) {
+    res.redirect('/login');
+  } else {
+    // If the user is logged in
+    // We call next() if the user is authenticated
+    next();
+  }
+};
+
+module.exports = withAuth;
