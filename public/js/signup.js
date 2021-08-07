@@ -11,15 +11,7 @@ const signupFormHandler = async (event) => {
       body: JSON.stringify({ email, password }), //username, email, password
       headers: { 'Content-Type': 'application/json' },
     });
-    /*
-    .then(function() {
-      console.log("ok");
-      console.log(response);
-  }).catch(function(error) {
-      console.log(error);
-      console.log(response);
-  });*/
-    
+
     if (response.ok) {
       document.location.replace('/');
       //alert("ok")

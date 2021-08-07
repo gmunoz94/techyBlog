@@ -1,0 +1,13 @@
+<div class="card col-5 my-3">
+    <a href="/api/posts/${{ id }}" style="text-decoration: none;">
+        <div class="card-body text-dark">
+            <div class="card-header">
+                {{ title }}
+                <p>{{ format_date createdAt }}</p>
+            </div>
+            <div class="card-text">
+                {{ body }}
+            </div>
+        </div>
+    </a>
+</div>

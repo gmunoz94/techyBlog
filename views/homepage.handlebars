@@ -6,5 +6,12 @@
             </section>
         </div>
 </div>
-
-<script src="/js/logout.js"></script> 
+<div class="container">
+    <div class="bg-light rounded-1 p-4">
+        <div class="row justify-content-around">
+            {{#each newPosts as |post|}}
+            {{> postPartial }}
+            {{/each}}
+        </div>
+    </div>
+</div>

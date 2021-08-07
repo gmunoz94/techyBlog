@@ -5,10 +5,7 @@ const { user } = require('../../models');
 
 router.post('/register', async (req, res) => {
     try {
-        const dbUserData = user.create({
-            email: req.body.email,
-            password: req.body.password,
-        });
+        const dbUserData = user.create(req.body);
 
         req.session.save(() => {
             req.session.loggedIn = true;
@@ -23,20 +20,20 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
-        const userData = user.findOne({
+        const dbUserData = await user.findOne({
             where: {
                 email: req.body.email,
             },
         });
 
-        if (!userData) {
+        if (!dbUserData) {
             res
                 .status(400)
                 .json({ message: 'Incorrect email or password. Please try again! '});
             return;
         }
 
-        const validPassword = await userData.checkPassword(req.body.password);
+        const validPassword = await dbUserData.checkPassword(req.body.password);
 
         if (!validPassword) {
             res
@@ -45,8 +42,14 @@ router.post('/login', async (req, res) => {
             return;
         }
 
+        const thisUser = dbUserData.get({ plain: true })
+
         req.session.save(() => {
             req.session.loggedIn =true;
+
+            req.session.thisUser = thisUser;
+
+            console.log(thisUser);
 
             res
                 .status(200)
