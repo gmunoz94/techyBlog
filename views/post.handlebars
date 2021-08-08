@@ -1,0 +1,28 @@
+<section class="container bg-dark my-4 p-4 rounded-1">
+    <div class="main-body">
+        <div class="row d-flex"> 
+            <div class="col-md-3 mb-3">
+                <div class="card-body bg-light rounded-3 text-secondary">
+                    <div class="d-flex flex-column text-center p-1"> 
+                        <h3>{{ currentPost.user.username }}</h3>
+                        <h6>{{ currentPost.user.email }}</h6>
+                    </div>   
+                </div>
+            </div>
+            <div class="col-md-9" id="new">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="container-fluid p-3 bg-light">
+                            <div class="card-header">
+                                <h5>{{ currentPost.title }}</h5>
+                            </div>
+                            <div class="card-text">
+                                {{ currentPost.body }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{#each currentPost.comments as |comment| }}
+            {{> commentPartial}}
+            {{/each}}
+            </div>

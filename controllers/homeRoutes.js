@@ -13,8 +13,8 @@ router.get('/', withAuth, async (req, res) => {
 
         res.render('homepage', {
             loggedIn: req.session.loggedIn,
-            newPosts,
             thisUser: req.session.thisUser,
+            newPosts,
         });
     } catch (err) {
         res.status(500).json(err);

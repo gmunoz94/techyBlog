@@ -51,8 +51,7 @@ user.init(
             validate: {
                 isAlpha: true,
             },
-        },
-        
+        },        
     },
     {
         hooks: {
