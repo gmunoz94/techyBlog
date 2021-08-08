@@ -7,7 +7,7 @@ user.hasMany(posts, {
 });
 
 user.hasMany(comments, {
-    foreignKey: 'user_id'
+    foreignKey: 'user_id',
 })
 
 posts.hasMany(comments, {

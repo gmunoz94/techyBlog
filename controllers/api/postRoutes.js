@@ -2,19 +2,17 @@ const router = require("./userRoutes");
 const withAuth = require('../../utils/auth')
 const { posts, user, comments } = require('../../models')
 
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const thisPost = await posts.findByPk(req.params.id, {
-            // include: [{ all: true, nested: true }]
-            include: [{
-                model: user,
-                attributes: [ 'username', 'email' ]
-            }, {
-                model: comments,
-                include: {
-                    model: user,
-                }
-            }]
+            include: [{ all: true, nested: true }]
+            // include: [{
+            //     model: user,
+            //     attributes: [ 'username', 'email' ]
+            // }, {
+            //     model: comments,
+            //     include: user
+            // }]
         })
 
         if (!thisPost) {
@@ -23,13 +21,16 @@ router.get('/:id', withAuth, async (req, res) => {
         }
 
         const currentPost = thisPost.get({ plain: true })
-        
-        console.log(currentPost)
 
-        res.render('post', {
-            loggedIn: req.session.loggedIn,
-            thisUser: req.session.thisUser,
-            currentPost,
+        const commenters = currentPost.comments
+        
+        console.log(commenters)
+
+        res
+            .render('post', {
+                loggedIn: req.session.loggedIn,
+                thisUser: req.session.thisUser,
+                currentPost,
         })
     } catch (err) {
         res.status(500).json(err)
