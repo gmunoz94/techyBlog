@@ -25,4 +25,35 @@
             {{#each currentPost.comments as |comment| }}
             {{> commentPartial}}
             {{/each}}
+            <div class="row mt-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">Leave comment</button>
             </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Write your comment!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="comment-text" class="col-form-label">Comment:</label>
+                        <input type="text" class="form-control" id="comment-text">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-primary">Post Comment</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/post.js"></script>

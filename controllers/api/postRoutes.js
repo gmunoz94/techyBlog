@@ -11,7 +11,14 @@ router.get('/:id', async (req, res) => {
             //     attributes: [ 'username', 'email' ]
             // }, {
             //     model: comments,
-            //     include: user
+            //     required: true,
+            //     include: [
+            //         {
+            //             model: user,
+            //             as: 'commenter',
+            //             required: true,
+            //         }
+            //     ]
             // }]
         })
 
@@ -22,9 +29,19 @@ router.get('/:id', async (req, res) => {
 
         const currentPost = thisPost.get({ plain: true })
 
-        const commenters = currentPost.comments
+        // const commenters = currentPost.comments
+
+        // const theseComments = await comments.findAll({
+        //     where: {
+        //         post_id: thisPost.id
+        //     },
+        //     include: {
+        //         model: user,
+        //         as: 'commenter'
+        //     }
+        // })
         
-        console.log(commenters)
+        // console.log(theseComments)
 
         res
             .render('post', {
