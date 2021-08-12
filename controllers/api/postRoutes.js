@@ -5,21 +5,18 @@ const { posts, user, comments } = require('../../models')
 router.get('/:id', async (req, res) => {
     try {
         const thisPost = await posts.findByPk(req.params.id, {
-            include: [{ all: true, nested: true }]
-            // include: [{
-            //     model: user,
-            //     attributes: [ 'username', 'email' ]
-            // }, {
-            //     model: comments,
-            //     required: true,
-            //     include: [
-            //         {
-            //             model: user,
-            //             as: 'commenter',
-            //             required: true,
-            //         }
-            //     ]
-            // }]
+            // include: [{ all: true, nested: true }]
+            include: [{
+                model: user,
+                attributes: [ 'username', 'email' ]
+            }, {
+                model: comments,
+                include: [
+                    {
+                        model: user,
+                    }
+                ]
+            }]
         })
 
         if (!thisPost) {
@@ -29,19 +26,7 @@ router.get('/:id', async (req, res) => {
 
         const currentPost = thisPost.get({ plain: true })
 
-        // const commenters = currentPost.comments
-
-        // const theseComments = await comments.findAll({
-        //     where: {
-        //         post_id: thisPost.id
-        //     },
-        //     include: {
-        //         model: user,
-        //         as: 'commenter'
-        //     }
-        // })
-        
-        // console.log(theseComments)
+        console.log(currentPost.comments[1].user);
 
         res
             .render('post', {

@@ -18,4 +18,8 @@ posts.belongsTo(user, {
     foreignKey: 'user_id'
 })
 
+comments.belongsTo(user, {
+    foreignKey: 'user_id',
+})
+
 module.exports = { user, posts, comments }
