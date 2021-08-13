@@ -1,14 +1,14 @@
 {
   "name": "mvcHW",
   "version": "1.0.0",
-  "description": "",
+  "description": "techBlog",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gerardo Munoz",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
