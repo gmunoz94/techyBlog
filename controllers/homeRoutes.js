@@ -29,6 +29,13 @@ router.get('/dashboard', withAuth, async (req, res) => {
     })
 })
 
+router.get('/createPost', withAuth, async (req, res) => {
+    res.render('createPost', {
+        loggedIn: req.session.loggedIn,
+        thisUser: req.session.thisUser
+    })
+})
+
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');

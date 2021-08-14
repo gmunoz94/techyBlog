@@ -15,5 +15,9 @@ module.exports = {
 
       return [year, month, day].join('-');
     },
+    isUser: (poster, thisUser) => {
+      if ([poster == thisUser])
+      return true;
+    }
   };
   

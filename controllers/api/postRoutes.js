@@ -2,6 +2,22 @@ const router = require("./userRoutes");
 const withAuth = require('../../utils/auth')
 const { posts, user, comments } = require('../../models')
 
+router.post('/', async (req, res) => {
+    try {
+        const newPost = await posts.create(req.body);
+
+        console.log(newPost);
+
+        res.render('/', {
+            loggedIn: req.session.loggedIn,
+            thisUser: req.session.thisUser,
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
+
 router.get('/:id', async (req, res) => {
     try {
         const thisPost = await posts.findByPk(req.params.id, {
@@ -26,7 +42,7 @@ router.get('/:id', async (req, res) => {
 
         const currentPost = thisPost.get({ plain: true })
 
-        console.log(currentPost.comments[1].user);
+        console.log(currentPost);
 
         res
             .render('post', {
